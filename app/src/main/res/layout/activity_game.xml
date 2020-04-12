@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <ma.apps.lightup.views.GameText
+            android:id="@+id/timeLabel"
+            android:layout_gravity="start|center_vertical"
+            android:textSize="7dp"
+            android:text="@string/time_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ma.apps.lightup.views.GameText
+            android:id="@+id/scoreLabel"
+            android:layout_gravity="end|center_vertical"
+            android:textSize="7dp"
+            android:text="@string/score_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/separator" />
+
+    <LinearLayout
+        android:id="@+id/gameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+</LinearLayout>

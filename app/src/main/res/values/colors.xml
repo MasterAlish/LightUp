@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009bec</color>
+    <color name="colorPrimaryDark">#D6D6D6</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimaryBackground">#FFFFFF</color>
+    <color name="rippleColor">#42000000</color>
+    <color name="gameCellColor">#3C000000</color>
+    <color name="textColor">#fce49c</color>
+</resources>

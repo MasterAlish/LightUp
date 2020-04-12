@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Включай</string>
+    <string name="start_game">Новая Игра</string>
+    <string name="game_over">Игра Окончена!</string>
+    <string name="ok">OK</string>
+    <string name="score_d">Очки: %d</string>
+    <string name="time_s">Время: %s</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="do_you_want_finish_this_game">Вы хотите выйти из игры?</string>
+    <string name="exit">Выход</string>
+    <string name="how_to_play">Как играть</string>
+    <string name="rules_part_1">1. Lines 20 это игра на доске, где есть шарики семи разных цветов.</string>
+    <string name="rules_part_2">2. Игрок может передвинуть один шарик за ход, чтобы уничтожить шарики сделав линию (горизонтально, вертикально или диагонально) минимум из 5 шариков одного цвета.</string>
+    <string name="rules_part_3">3. Если игрок сделал линию минимум из 5 шариков одного цвета, шарики а этой линии исчезают, и игрок получает еще один ход.</string>
+    <string name="rules_part_4">4. Если нет, добавляются три новых шарика, и игра продолжается пока доска полностью не заполнится шариками.</string>
+    <string name="close">Закрыть</string>
+    <string name="scores">Рекорды</string>
+    <string name="high_scores">Лучшие мировые рекорды</string>
+    <string name="you_have_ho_scores_yet">Пусти</string>
+    <string name="your_score_is_d">Ваши очки: %d</string>
+    <string name="you">Вы</string>
+</resources>
