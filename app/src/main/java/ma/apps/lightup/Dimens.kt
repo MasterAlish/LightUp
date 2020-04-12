@@ -17,10 +17,15 @@ class Dimens(app: App) {
         windowManager.defaultDisplay.getSize(size)
         deviceWidth = size.x
         deviceHeight = size.y
-        pixelsInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, app.resources.displayMetrics)
+        pixelsInDp =
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, app.resources.displayMetrics)
     }
 
     fun dpToPx(dp: Float): Int {
         return (pixelsInDp * dp).roundToInt()
+    }
+
+    fun pxToDp(px: Int): Float {
+        return px / pixelsInDp
     }
 }

@@ -3,7 +3,7 @@
     <string name="start_game">New Game</string>
     <string name="game_over">Game Over!</string>
     <string name="ok">OK</string>
-    <string name="score_d">Score: %d</string>
+    <string name="level_d">Level: %d</string>
     <string name="time_s">Time: %s</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>

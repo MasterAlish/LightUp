@@ -30,7 +30,7 @@ class ScoresActivity : AppCompatActivity() {
                     LayoutInflater.from(this).inflate(R.layout.score_item, scoresContainer, false)
                 view.findViewById<GameText>(R.id.nameLabel)
                     .setText("${score.index + 1}. ${score.value.name}")
-                view.findViewById<GameText>(R.id.scoreLabel).setText(score.value.points.toString())
+                view.findViewById<GameText>(R.id.levelLabel).setText(score.value.points.toString())
                 scoresContainer.addView(view)
             }
         }

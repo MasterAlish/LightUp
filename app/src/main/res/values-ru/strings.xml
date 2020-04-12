@@ -3,7 +3,7 @@
     <string name="start_game">Новая Игра</string>
     <string name="game_over">Игра Окончена!</string>
     <string name="ok">OK</string>
-    <string name="score_d">Очки: %d</string>
+    <string name="level_d">Уровень: %d</string>
     <string name="time_s">Время: %s</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>

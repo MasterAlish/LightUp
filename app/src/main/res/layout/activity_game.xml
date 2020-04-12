@@ -13,19 +13,19 @@
 
         <ma.apps.lightup.views.GameText
             android:id="@+id/timeLabel"
-            android:layout_gravity="start|center_vertical"
-            android:textSize="7dp"
-            android:text="@string/time_s"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="@string/time_s"
+            android:textSize="7dp" />
 
         <ma.apps.lightup.views.GameText
-            android:id="@+id/scoreLabel"
-            android:layout_gravity="end|center_vertical"
-            android:textSize="7dp"
-            android:text="@string/score_d"
+            android:id="@+id/levelLabel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="@string/level_d"
+            android:textSize="7dp" />
 
     </FrameLayout>
 
@@ -39,6 +39,7 @@
         android:id="@+id/gameField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:padding="4dp" />
 
 </LinearLayout>
