@@ -15,4 +15,14 @@
         android:text="Button"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/iconView"
+        android:layout_width="56dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_board"
+        android:visibility="gone" />
+
 </FrameLayout>

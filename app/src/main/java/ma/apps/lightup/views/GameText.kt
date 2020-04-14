@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import ma.apps.lightup.R
@@ -39,7 +41,7 @@ class GameText(context: Context, attrs: AttributeSet?) : FrameLayout(context, at
         inflater.inflate(R.layout.game_text, this, true)
 
         textMain = findViewById(R.id.textMain)
-        textMain.textSize = textSize
+        textMain.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         textMain.setTextColor(textColor)
     }
 

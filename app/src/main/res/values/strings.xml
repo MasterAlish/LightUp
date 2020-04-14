@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Light Up</string>
-    <string name="start_game">New Game</string>
+    <string name="start_game">Start Game</string>
     <string name="game_over">Game Over!</string>
     <string name="ok">OK</string>
-    <string name="level_d">Level: %d</string>
+    <string name="level_d">%dx%d Level: %d</string>
     <string name="time_s">Time: %s</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -15,9 +15,18 @@
     <string name="rules_part_3">3. If the player does form such lines of at least five balls of the same color, the balls in those lines disappear, and he gains one turn, i.e. he can move another ball. </string>
     <string name="rules_part_4">4. If not, three new balls are added, and the game continues until the board is full.</string>
     <string name="close">Close</string>
-    <string name="scores">Scores</string>
+    <string name="levels">Levels</string>
     <string name="high_scores">The world\'s highest scores</string>
     <string name="you_have_ho_scores_yet">No scores</string>
     <string name="your_score_is_d">Your score: %d</string>
     <string name="you">You</string>
+    <string name="check">Check</string>
+    <string name="you_have_not_lighted_cells">You didn\'t light up some cells</string>
+    <string name="some_bulbs_are_intersecting">Some bulbs are intersect with each other</string>
+    <string name="wrong_bulbs_around_walls">Wrong amount of bulbs surrounding this walls</string>
+    <string name="select_size">Select puzzle size</string>
+    <string name="select_level">Select level</string>
+    <string name="level_done">Level done!</string>
+    <string name="you_have_successfully_finished_this_level">You have successfully finished this level</string>
+    <string name="next_level">Next Level</string>
 </resources>

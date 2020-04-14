@@ -1,19 +1,18 @@
 package ma.apps.lightup
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.TranslateAnimation
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import ma.apps.lightup.game.*
@@ -23,17 +22,23 @@ import java.util.*
 class GameActivity : AppCompatActivity() {
     private val cells: MutableMap<Coord, FrameLayout> = mutableMapOf()
     private lateinit var gameField: LinearLayout
+    private lateinit var checkBtn: View
     private lateinit var game: Game
     private lateinit var levelLabel: GameText
     private lateinit var timeLabel: GameText
     private val sounds = GameSounds()
     private val timer = Timer()
     private var totalSeconds = 0
+    private var size = 7
+    private var difficulty = Difficulty.EASY
+    private var number = 1
+    private var level = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_game)
+        initParams()
         initGame()
         initUI()
         initAnimations()
@@ -42,8 +47,19 @@ class GameActivity : AppCompatActivity() {
         startTimer()
     }
 
+    private fun initParams() {
+        size = intent.extras!!.getInt("size", 7)
+        level = intent.extras!!.getInt("level", 0)
+        difficulty = when (level / 16) {
+            0 -> Difficulty.EASY
+            1 -> Difficulty.MEDIUM
+            else -> Difficulty.HARD
+        }
+        number = (level % 16) + 1
+    }
+
     private fun initGame() {
-        val level = LevelManager.loadLevel(14, Difficulty.HARD, 4)
+        val level = LevelManager.loadLevel(size, difficulty, number)
         game = Game(level, gameListener)
     }
 
@@ -51,10 +67,12 @@ class GameActivity : AppCompatActivity() {
         gameField = findViewById(R.id.gameField)
         initGameField(gameField, game)
 
-        levelLabel = findViewById(R.id.levelLabel)
-        timeLabel = findViewById(R.id.timeLabel)
+        checkBtn = findViewById(R.id.checkBtn)
+        checkBtn.setOnClickListener { game.checkForFinish() }
 
-        levelLabel.setText(getString(R.string.level_d, game.level.index()))
+        timeLabel = findViewById(R.id.timeLabel)
+        levelLabel = findViewById(R.id.levelLabel)
+        levelLabel.setText(getString(R.string.level_d, size, size, level + 1))
 
         updateTime()
     }
@@ -89,7 +107,7 @@ class GameActivity : AppCompatActivity() {
             cells[coord]!!.removeAllViews()
             when (cell.type) {
                 CellType.EMPTY -> {
-                    if (cell.number > 0) {
+                    if (cell.value > 0) {
                         cells[coord]!!.setBackgroundResource(R.drawable.cell_lighted)
                     } else {
                         cells[coord]!!.setBackgroundResource(R.drawable.cell_empty)
@@ -105,6 +123,72 @@ class GameActivity : AppCompatActivity() {
                 }
                 else -> Unit
             }
+        }
+
+        override fun onGameCheckErrors(
+            allCellsLighted: Boolean,
+            noRedBulbs: Boolean,
+            notFinishedWalls: Set<Coord>
+        ) {
+            if (!allCellsLighted) {
+                Toast.makeText(
+                    this@GameActivity,
+                    R.string.you_have_not_lighted_cells,
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (!noRedBulbs) {
+                Toast.makeText(
+                    this@GameActivity,
+                    R.string.some_bulbs_are_intersecting,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            } else if (notFinishedWalls.isNotEmpty()) {
+                Toast.makeText(
+                    this@GameActivity,
+                    R.string.wrong_bulbs_around_walls,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+
+                for (wall in notFinishedWalls) {
+                    cells[wall]!!.setBackgroundResource(R.drawable.cell_wall_error)
+                }
+                Handler().postDelayed({
+                    for (wall in notFinishedWalls) {
+                        cells[wall]!!.setBackgroundResource(R.drawable.cell_wall)
+                    }
+                }, 2000)
+            }
+        }
+
+        override fun onGameFinished() {
+            val lastSavedLevel = App.cache.loadLastLevel(size)
+            if (level >= lastSavedLevel) {
+                App.cache.saveLastLevel(size, level + 1)
+            }
+
+            val builder = AlertDialog.Builder(this@GameActivity)
+            val dialog = builder
+                .setTitle(R.string.level_done)
+                .setMessage(R.string.you_have_successfully_finished_this_level)
+                .setPositiveButton(R.string.next_level) { _, _ -> nextLevel() }
+                .setNegativeButton(R.string.close) { _, _ -> finish() }
+                .create()
+            dialog.show()
+        }
+    }
+
+    private fun nextLevel() {
+        if (level < 16 * 3) {
+            startActivity(
+                Intent(this, GameActivity::class.java)
+                    .putExtra("size", size)
+                    .putExtra("level", level + 1)
+            )
+            finish()
+        } else {
+            finish()
         }
     }
 
@@ -170,7 +254,7 @@ class GameActivity : AppCompatActivity() {
                     text.typeface = typeface
                     text.textSize = App.dimens.pxToDp((cellSize * 0.6).toInt())
                     text.setTextColor(Color.WHITE)
-                    text.text = game.level.cells[y][x].number.toString()
+                    text.text = game.level.cells[y][x].value.toString()
                     cell.addView(text)
                 }
                 cell.clipToPadding = false

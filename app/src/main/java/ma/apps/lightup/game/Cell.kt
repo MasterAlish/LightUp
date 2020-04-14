@@ -1,6 +1,6 @@
 package ma.apps.lightup.game
 
-data class Cell(val type: CellType, var number: Int = 0)
+data class Cell(val type: CellType, var value: Int = 0)
 
 enum class CellType {
     EMPTY,

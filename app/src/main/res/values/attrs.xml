@@ -3,6 +3,9 @@
     <declare-styleable name="GameButton">
         <attr name="android:text" />
         <attr name="backgroundColor" format="color" />
+        <attr name="android:textSize" />
+        <attr name="icon" format="reference" />
+        <attr name="isHighlighted" format="boolean" />
     </declare-styleable>
     <declare-styleable name="GameText">
         <attr name="android:text" />

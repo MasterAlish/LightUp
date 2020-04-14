@@ -2,46 +2,25 @@ package ma.apps.lightup.cache
 
 import android.app.Application
 import android.content.Context
-import java.lang.Exception
-import java.lang.StringBuilder
 
 class Cache(val app: Application) {
-    private val LinesDelimiter = ";;;;"
-    private val Delimiter = "::::"
-
-    fun loadScores(): List<Score> {
-        val prefs = app.getSharedPreferences("ScoresPrefs", Context.MODE_PRIVATE)
-        val scoresStr = prefs.getString("Scores", "")!!.split(";;;;")
-
-        val scores = mutableListOf<Score>()
-
-        for(scoreStr in scoresStr) {
-            try {
-                val data = scoreStr.split(Delimiter)
-                scores.add(Score(data[0], data[1].toInt()))
-            }catch (e:Exception){}
-        }
-        return scores
+    fun loadLastLevel(size: Int): Int {
+        val prefs = app.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE)
+        return prefs.getInt("Last_For_Size_$size", 0)
     }
 
-    fun saveScore(newScore: Score){
-        var scores = loadScores().toMutableList()
-        scores.add(newScore)
-        scores.sortBy { -it.points }
-        if(scores.size > 10) {
-            scores = scores.subList(0, 10)
-        }
+    fun saveLastLevel(size: Int, level: Int) {
+        val prefs = app.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE)
+        prefs.edit().putInt("Last_For_Size_$size", level).apply()
+    }
 
-        val scoresStr = StringBuilder()
+    fun getLastPlayedSize(): Int {
+        val prefs = app.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE)
+        return prefs.getInt("Last_Played_Size", 7)
+    }
 
-        scores.forEach { score ->
-            scoresStr.append(score.name)
-            scoresStr.append(Delimiter)
-            scoresStr.append(score.points)
-            scoresStr.append(LinesDelimiter)
-        }
-
-        val prefs = app.getSharedPreferences("ScoresPrefs", Context.MODE_PRIVATE)
-        prefs.edit().putString("Scores", scoresStr.toString()).apply()
+    fun setLastPlayedSize(size: Int) {
+        val prefs = app.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE)
+        prefs.edit().putInt("Last_Played_Size", size).apply()
     }
 }

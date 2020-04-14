@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:text="@string/time_s"
-            android:textSize="7dp" />
+            android:textSize="16dp" />
 
         <ma.apps.lightup.views.GameText
             android:id="@+id/levelLabel"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:text="@string/level_d"
-            android:textSize="7dp" />
+            android:textSize="16dp" />
 
     </FrameLayout>
 
@@ -41,5 +41,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="4dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/separator" />
+
+    <ma.apps.lightup.views.GameButton
+        android:id="@+id/checkBtn"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/check"
+        android:textSize="16dp" />
 
 </LinearLayout>

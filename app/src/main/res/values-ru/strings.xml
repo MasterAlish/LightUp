@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Включай</string>
-    <string name="start_game">Новая Игра</string>
+    <string name="app_name">Лампочки</string>
+    <string name="start_game">Начать Игру</string>
     <string name="game_over">Игра Окончена!</string>
     <string name="ok">OK</string>
-    <string name="level_d">Уровень: %d</string>
+    <string name="level_d">%dx%d Уровень: %d</string>
     <string name="time_s">Время: %s</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
@@ -15,9 +15,18 @@
     <string name="rules_part_3">3. Если игрок сделал линию минимум из 5 шариков одного цвета, шарики а этой линии исчезают, и игрок получает еще один ход.</string>
     <string name="rules_part_4">4. Если нет, добавляются три новых шарика, и игра продолжается пока доска полностью не заполнится шариками.</string>
     <string name="close">Закрыть</string>
-    <string name="scores">Рекорды</string>
+    <string name="levels">Уровни</string>
     <string name="high_scores">Лучшие мировые рекорды</string>
     <string name="you_have_ho_scores_yet">Пусти</string>
     <string name="your_score_is_d">Ваши очки: %d</string>
     <string name="you">Вы</string>
+    <string name="check">Проверить</string>
+    <string name="you_have_not_lighted_cells">Вы не осветили некоторые ячейки</string>
+    <string name="some_bulbs_are_intersecting">Некоторые лампочки пересекаются друг с другом</string>
+    <string name="wrong_bulbs_around_walls">Эти стены окружены неправильным количеством лампочек</string>
+    <string name="select_size">Выберите размер уровня</string>
+    <string name="select_level">Выберите уровень</string>
+    <string name="level_done">Уровень закончен!</string>
+    <string name="you_have_successfully_finished_this_level">Вы успешно закончили этот уровень</string>
+    <string name="next_level">Следующий уровень</string>
 </resources>

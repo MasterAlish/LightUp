@@ -117,12 +117,46 @@ class Game(val level: Level, val gameListener: GameListener) {
                 val coord = Coord(x, y)
                 val cell = cells[coord]!!
                 if (cell.type == CellType.EMPTY) {
-                    if (cell.number != newState[coord]) {
-                        cell.number = newState[coord]!!
+                    if (cell.value != newState[coord]) {
+                        cell.value = newState[coord]!!
                         gameListener.onCellUpdate(coord, cell)
                     }
                 }
             }
         }
+    }
+
+    fun checkForFinish() {
+        val allCellsLighted = cells.values.none { it.type == CellType.EMPTY && it.value == 0 }
+        val noRedBulbs = cells.values.none { it.type == CellType.RED_BULB }
+        val notFinishedWalls = getNotFinishedWalls()
+        if (allCellsLighted && noRedBulbs && notFinishedWalls.isEmpty()) {
+            gameListener.onGameFinished()
+        } else {
+            gameListener.onGameCheckErrors(allCellsLighted, noRedBulbs, notFinishedWalls)
+        }
+    }
+
+    private fun getNotFinishedWalls(): Set<Coord> {
+        val notFinished = mutableSetOf<Coord>()
+        cells.keys.forEach { coord ->
+            val cell = cells[coord]!!
+            if (cell.type == CellType.WALL_NUMBERED) {
+                var bulbsAround = 0
+                val offsets = listOf(Coord(0, 1), Coord(0, -1), Coord(1, 0), Coord(-1, 0))
+                offsets.forEach { offset ->
+                    val coordAround = Coord(coord.x + offset.x, coord.y + offset.y)
+                    if (coordAround in cells) {
+                        if (cells[coordAround]!!.type == CellType.BULB || cells[coordAround]!!.type == CellType.RED_BULB) {
+                            bulbsAround++
+                        }
+                    }
+                }
+                if (bulbsAround != cell.value) {
+                    notFinished.add(coord)
+                }
+            }
+        }
+        return notFinished
     }
 }

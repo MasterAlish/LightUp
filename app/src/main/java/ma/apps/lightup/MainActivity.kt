@@ -20,26 +20,23 @@ class MainActivity : AppCompatActivity() {
         findViewById<GameButton>(R.id.startGame).setOnClickListener {
             startGame()
         }
-        findViewById<GameButton>(R.id.scores).setOnClickListener {
-            openScores()
-        }
-        findViewById<GameButton>(R.id.howToPlay).setOnClickListener {
-            openHelp()
+        findViewById<GameButton>(R.id.levels).setOnClickListener {
+            openLevels()
         }
         findViewById<GameButton>(R.id.exitButton).setOnClickListener {
             finish()
         }
     }
 
-    private fun openScores() {
-        startActivity(Intent(this, ScoresActivity::class.java))
-    }
-
-    private fun openHelp() {
-        startActivity(Intent(this, HelpActivity::class.java))
+    private fun openLevels() {
+        startActivity(Intent(this, SelectSizeActivity::class.java))
     }
 
     private fun startGame() {
-        startActivity(Intent(this, GameActivity::class.java))
+        val size = App.cache.getLastPlayedSize()
+        val level = App.cache.loadLastLevel(size)
+        startActivity(Intent(this, GameActivity::class.java)
+            .putExtra("size", size)
+            .putExtra("level", level))
     }
 }

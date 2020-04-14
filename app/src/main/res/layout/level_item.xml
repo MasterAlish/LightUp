@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ma.apps.lightup.views.GameButton
+        android:id="@+id/levelBtn"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:foreground="@drawable/game_button_ripple"
+        android:text="13"
+        android:textSize="24dp" />
+
+    <ImageView
+        android:id="@+id/lockedIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_stroke"
+        android:padding="16dp"
+        android:src="@drawable/ic_lock"
+        android:visibility="gone" />
+
+
+</FrameLayout>

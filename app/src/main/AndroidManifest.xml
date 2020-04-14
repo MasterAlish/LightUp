@@ -24,8 +24,8 @@
         </activity>
 
         <activity android:name="ma.apps.lightup.GameActivity" />
-        <activity android:name="ma.apps.lightup.HelpActivity" />
-        <activity android:name="ma.apps.lightup.ScoresActivity" />
+        <activity android:name="ma.apps.lightup.SelectSizeActivity" />
+        <activity android:name="ma.apps.lightup.SelectLevelActivity" />
     </application>
 
 </manifest>
