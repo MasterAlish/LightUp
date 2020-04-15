@@ -7,13 +7,37 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ma.apps.lightup.views.GameText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="@string/app_name"
+        android:fontFamily="@font/bellota_regular"
+        android:text="@string/play_in"
         android:textColor="@color/textColor"
         android:textSize="30dp" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/bellota_bold"
+            android:text="@string/app_name"
+            android:textColor="#1B000000"
+            android:textSize="60dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/bellota_bold"
+            android:text="@string/app_name"
+            android:textColor="#FFF"
+            android:textSize="60dp" />
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/startGame"
