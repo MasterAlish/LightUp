@@ -72,6 +72,7 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
             lp.setMargins(0, 0, textMargin.toInt(), 0)
             textMain.layoutParams = lp
             iconView.visibility = View.VISIBLE
+            iconView.setImageDrawable(icon)
         } else {
             iconView.visibility = View.GONE
         }

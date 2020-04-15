@@ -29,4 +29,6 @@
     <string name="level_done">Уровень закончен!</string>
     <string name="you_have_successfully_finished_this_level">Вы успешно закончили этот уровень</string>
     <string name="next_level">Следующий уровень</string>
+    <string name="excellent">Превосходно!</string>
+    <string name="menu">Меню</string>
 </resources>

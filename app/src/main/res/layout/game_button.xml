@@ -19,6 +19,7 @@
         android:fontFamily="@font/bellota_regular"
         android:layout_marginBottom="2dp"
         android:text="Button"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp" />
 

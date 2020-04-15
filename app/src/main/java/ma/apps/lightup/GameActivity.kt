@@ -16,10 +16,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import ma.apps.lightup.game.*
+import ma.apps.lightup.listener.FinishDialogListener
+import ma.apps.lightup.views.FinishDialog
 import ma.apps.lightup.views.GameText
 import java.util.*
 
-class GameActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity(), FinishDialogListener {
     private val cells: MutableMap<Coord, FrameLayout> = mutableMapOf()
     private lateinit var gameField: LinearLayout
     private lateinit var checkBtn: View
@@ -168,18 +170,15 @@ class GameActivity : AppCompatActivity() {
                 App.cache.saveLastLevel(size, level + 1)
             }
 
-            val builder = AlertDialog.Builder(this@GameActivity)
-            val dialog = builder
-                .setTitle(R.string.level_done)
-                .setMessage(R.string.you_have_successfully_finished_this_level)
-                .setPositiveButton(R.string.next_level) { _, _ -> nextLevel() }
-                .setNegativeButton(R.string.close) { _, _ -> finish() }
-                .create()
-            dialog.show()
+            FinishDialog(this@GameActivity, this@GameActivity).show()
         }
     }
 
-    private fun nextLevel() {
+    override fun onFinish() {
+        finish()
+    }
+
+    override fun onNextLevel() {
         if (level < 16 * 3) {
             startActivity(
                 Intent(this, GameActivity::class.java)
@@ -282,7 +281,7 @@ class GameActivity : AppCompatActivity() {
         set.addAnimation(jump)
     }
 
-    override fun onBackPressed() {
+    fun onWantToExit() {
         val builder = AlertDialog.Builder(this@GameActivity)
         val dialog = builder
             .setTitle(R.string.app_name)

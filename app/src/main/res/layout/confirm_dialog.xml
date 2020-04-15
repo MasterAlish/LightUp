@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/dialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/bellota_bold"
+            android:text="@string/excellent"
+            android:textColor="@color/textColor"
+            android:textSize="34sp" />
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/dialogMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bellota_regular"
+            android:lineHeight="21sp"
+            android:text="@string/you_have_successfully_finished_this_level"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_thumbs_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <ma.apps.lightup.views.GameButton
+            android:id="@+id/dialogNextLevel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/next_level"
+            android:textSize="16dp"
+            app:icon="@drawable/ic_forward" />
+
+        <ma.apps.lightup.views.GameButton
+            android:id="@+id/dialogFinish"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/menu"
+            android:textSize="16dp"
+            app:icon="@drawable/ic_menu" />
+
+    </LinearLayout>
+</LinearLayout>

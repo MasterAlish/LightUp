@@ -29,4 +29,6 @@
     <string name="level_done">Level done!</string>
     <string name="you_have_successfully_finished_this_level">You have successfully finished this level</string>
     <string name="next_level">Next Level</string>
+    <string name="excellent">Excellent!</string>
+    <string name="menu">Menu</string>
 </resources>
