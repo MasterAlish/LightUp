@@ -19,6 +19,7 @@ import ma.apps.lightup.game.*
 import ma.apps.lightup.listener.FinishDialogListener
 import ma.apps.lightup.views.FinishDialog
 import ma.apps.lightup.views.GameText
+import ma.apps.lightup.views.HelpDialog
 import java.util.*
 
 class GameActivity : AppCompatActivity(), FinishDialogListener {
@@ -32,6 +33,7 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
     private val timer = Timer()
     private var totalSeconds = 0
     private var size = 7
+    private var demo = false
     private var difficulty = Difficulty.EASY
     private var number = 1
     private var level = 0
@@ -50,6 +52,7 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
     }
 
     private fun initParams() {
+        demo = intent.extras!!.getBoolean("demo", false)
         size = intent.extras!!.getInt("size", 7)
         level = intent.extras!!.getInt("level", 0)
         difficulty = when (level / 16) {
@@ -61,7 +64,10 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
     }
 
     private fun initGame() {
-        val level = LevelManager.loadLevel(size, difficulty, number)
+        val level = when (demo) {
+            true -> LevelManager.loadDemoLevel()
+            else -> LevelManager.loadLevel(size, difficulty, number)
+        }
         game = Game(level, gameListener)
     }
 
@@ -77,6 +83,15 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
         levelLabel.setText(getString(R.string.level_d, size, size, level + 1))
 
         updateTime()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (demo) {
+            Handler().postDelayed({
+                HelpDialog(this).show()
+            }, 1000)
+        }
     }
 
     private fun startTimer() {
@@ -175,31 +190,42 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
     }
 
     override fun onFinish() {
+        App.cache.setDemoPlayed()
         finish()
     }
 
     override fun onNextLevel() {
-        if (level < 16 * 3 - 1) {
+        var nextLevel = level + 1
+        var nextSize = size
+        var hasNext = true
+
+        if (demo) {
+            App.cache.setDemoPlayed()
+            hasNext = true
+            nextSize = 7
+            nextLevel = 0
+        } else {
+            if (level < 16 * 3 - 1) {
+                hasNext = true
+            } else {
+                if (size < 14) {
+                    hasNext = true
+                    nextSize = when (size) {
+                        7 -> 10
+                        else -> 14
+                    }
+                    nextLevel = 0
+                }
+            }
+        }
+        if (hasNext) {
             startActivity(
                 Intent(this, GameActivity::class.java)
-                    .putExtra("size", size)
-                    .putExtra("level", level + 1)
+                    .putExtra("size", nextSize)
+                    .putExtra("level", nextLevel)
             )
-            finish()
-        } else {
-            if(size < 14){
-                val nextSize = when (size) {
-                    7 -> 10
-                    else -> 14
-                }
-                startActivity(
-                    Intent(this, GameActivity::class.java)
-                        .putExtra("size", nextSize)
-                        .putExtra("level", 0)
-                )
-            }
-            finish()
         }
+        finish()
     }
 
     private fun makeBulb(red: Boolean = false): ImageView {

@@ -32,4 +32,9 @@
     <string name="excellent">Превосходно!</string>
     <string name="menu">Меню</string>
     <string name="play_in">Играй в</string>
+    <string name="got_it">Понятно!</string>
+    <string name="little_help">Ликбез</string>
+    <string name="goal_of_the_game">Цель: Осветить все ячейки с помощью лампочек</string>
+    <string name="rule_1">Правило 1: Лампочки не должны светить друг в друга</string>
+    <string name="rule_2">Правило 2: Стены с числами должны быть окружены указанным количеством лампочек(не по диагонали)</string>
 </resources>

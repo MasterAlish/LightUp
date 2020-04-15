@@ -23,4 +23,14 @@ class Cache(val app: Application) {
         val prefs = app.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE)
         prefs.edit().putInt("Last_Played_Size", size).apply()
     }
+
+    fun isDemoPlayed(): Boolean {
+        val prefs = app.getSharedPreferences("Demo", Context.MODE_PRIVATE)
+        return prefs.getBoolean("Demo_Played", false)
+    }
+
+    fun setDemoPlayed() {
+        val prefs = app.getSharedPreferences("Demo", Context.MODE_PRIVATE)
+        prefs.edit().putBoolean("Demo_Played", true).apply()
+    }
 }

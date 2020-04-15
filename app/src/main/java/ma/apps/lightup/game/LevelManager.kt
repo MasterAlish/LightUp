@@ -1,11 +1,20 @@
 package ma.apps.lightup.game
 
 object LevelManager {
+    fun loadDemoLevel(): Level {
+        val cells = parseLevelCells(DemoLevel)
+        return Level(5, Difficulty.EASY, 1, cells)
+    }
+
     fun loadLevel(size: Int, difficulty: Difficulty, number: Int): Level {
         val index = levelIndex(size, difficulty, number)
+        val cells = parseLevelCells(Levels[index])
+        return Level(size, difficulty, number, cells)
+    }
 
+    private fun parseLevelCells(levelStr: String): MutableList<List<Cell>> {
         val cells = mutableListOf<List<Cell>>()
-        val strRows = Levels[index].split("|")
+        val strRows = levelStr.split("|")
         for (strRow in strRows) {
             val row = mutableListOf<Cell>()
             for (char in strRow) {
@@ -19,7 +28,7 @@ object LevelManager {
             }
             cells.add(row)
         }
-        return Level(size, difficulty, number, cells)
+        return cells
     }
 
     fun levelIndex(

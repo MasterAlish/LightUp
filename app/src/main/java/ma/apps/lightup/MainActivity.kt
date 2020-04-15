@@ -23,10 +23,14 @@ class MainActivity : AppCompatActivity() {
         animateStartBtn(startBtn)
 
         startBtn.setOnClickListener {
-            startGame()
+            checkDemoAnd {
+                startGame()
+            }
         }
         findViewById<GameButton>(R.id.levels).setOnClickListener {
-            openLevels()
+            checkDemoAnd {
+                openLevels()
+            }
         }
         findViewById<GameButton>(R.id.exitButton).setOnClickListener {
             finish()
@@ -34,7 +38,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun animateStartBtn(startBtn: View) {
-        val rotate = RotateAnimation(-10f, 10f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        val rotate = RotateAnimation(
+            -10f, 10f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
         rotate.duration = 160
         rotate.repeatMode = Animation.REVERSE
         rotate.repeatCount = Animation.INFINITE
@@ -54,5 +62,16 @@ class MainActivity : AppCompatActivity() {
                 .putExtra("size", size)
                 .putExtra("level", level)
         )
+    }
+
+    private fun checkDemoAnd(runAfter: () -> Unit) {
+        if (App.cache.isDemoPlayed()) {
+            runAfter()
+        } else {
+            startActivity(Intent(this, GameActivity::class.java)
+                .putExtra("size", 5)
+                .putExtra("demo", true)
+                .putExtra("level", 0))
+        }
     }
 }

@@ -1,5 +1,7 @@
 package ma.apps.lightup.game
 
+val DemoLevel = "2  * |     |  1  |     |   * "
+
 val Levels = listOf(
 
 //    Easy

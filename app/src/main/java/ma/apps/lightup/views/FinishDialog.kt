@@ -22,7 +22,7 @@ class FinishDialog(context: Context, private val listener: FinishDialogListener 
     }
 
     private fun initUI() {
-        setContentView(R.layout.confirm_dialog)
+        setContentView(R.layout.finish_dialog)
         this.window!!.setBackgroundDrawableResource(R.drawable.dialog_bg)
         titleView = findViewById(R.id.dialogTitle)
         messageView = findViewById(R.id.dialogMessage)
