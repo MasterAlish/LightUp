@@ -53,6 +53,7 @@
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:foreground="@drawable/game_button_ripple"
         android:text="@string/check"
         android:textSize="16dp" />
 

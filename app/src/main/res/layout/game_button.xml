@@ -3,8 +3,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bgView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="2dp">
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/innerBgView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="6dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -12,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/bellota_regular"
+        android:layout_marginBottom="2dp"
         android:text="Button"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp" />

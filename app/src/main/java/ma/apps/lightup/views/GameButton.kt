@@ -24,10 +24,13 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
     private var bgColor: Int = Color.BLACK
     private var isHighlighted: Boolean = false
     private lateinit var normalBg: GradientDrawable
-    private lateinit var hightlightBg: GradientDrawable
+    private lateinit var innerBg: GradientDrawable
+    private lateinit var highlightBg: GradientDrawable
+    private lateinit var highlightInnerBg: GradientDrawable
 
     private lateinit var textMain: TextView
     private lateinit var mainBgView: View
+    private lateinit var innerBgView: View
     private lateinit var iconView: ImageView
 
     init {
@@ -59,6 +62,7 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
         textMain = findViewById(R.id.textView)
         textMain.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         mainBgView = findViewById(R.id.bgView)
+        innerBgView = findViewById(R.id.innerBgView)
         iconView = findViewById(R.id.iconView)
 
         val textMargin =
@@ -85,10 +89,12 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
 
     private fun invalidateStyle() {
         if (isHighlighted) {
-            mainBgView.background = hightlightBg
+            mainBgView.background = highlightBg
+            innerBgView.background = highlightInnerBg
             textMain.setTextColor(resources.getColor(R.color.colorSecondary))
         } else {
             mainBgView.background = normalBg
+            innerBgView.background = innerBg
             textMain.setTextColor(resources.getColor(R.color.colorPrimary))
         }
     }
@@ -97,8 +103,23 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
         val cornerRadius =
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, resources.displayMetrics)
 
-        normalBg = GradientDrawable()
+        innerBg = GradientDrawable()
+        innerBg.shape = GradientDrawable.RECTANGLE
+        innerBg.cornerRadii = floatArrayOf(
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius
+        )
+        innerBg.setColor(resources.getColor(R.color.colorPrimaryBackground))
+
+        normalBg= GradientDrawable()
         normalBg.shape = GradientDrawable.RECTANGLE
+        normalBg.gradientType = GradientDrawable.LINEAR_GRADIENT
         normalBg.cornerRadii = floatArrayOf(
             cornerRadius,
             cornerRadius,
@@ -109,11 +130,16 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
             cornerRadius,
             cornerRadius
         )
-        normalBg.setColor(resources.getColor(R.color.colorPrimaryBackground))
+        normalBg.colors = IntArray(5) {
+            when(it) {
+                4 -> Color.parseColor("#defafe")
+                else -> Color.WHITE
+            }
+        }
 
-        hightlightBg = GradientDrawable()
-        hightlightBg.shape = GradientDrawable.RECTANGLE
-        hightlightBg.cornerRadii = floatArrayOf(
+        highlightBg = GradientDrawable()
+        highlightBg.shape = GradientDrawable.RECTANGLE
+        highlightBg.cornerRadii = floatArrayOf(
             cornerRadius,
             cornerRadius,
             cornerRadius,
@@ -123,6 +149,25 @@ class GameButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
             cornerRadius,
             cornerRadius
         )
-        hightlightBg.setColor(resources.getColor(R.color.colorSecondaryBackground))
+        highlightBg.colors = IntArray(5) {
+            when(it) {
+                4 -> Color.parseColor("#F0DA74")
+                else -> resources.getColor(R.color.colorSecondaryBackground)
+            }
+        }
+
+        highlightInnerBg = GradientDrawable()
+        highlightInnerBg.shape = GradientDrawable.RECTANGLE
+        highlightInnerBg.cornerRadii = floatArrayOf(
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius,
+            cornerRadius
+        )
+        highlightInnerBg.setColor(resources.getColor(R.color.colorSecondaryBackground))
     }
 }

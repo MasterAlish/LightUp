@@ -38,9 +38,9 @@ class GameText(context: Context, attrs: AttributeSet?) : FrameLayout(context, at
 
     private fun initLayout() {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.game_text, this, true)
+        val view = inflater.inflate(R.layout.game_text, this, true)
 
-        textMain = findViewById(R.id.textMain)
+        textMain = view.findViewById(R.id.textMain)
         textMain.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         textMain.setTextColor(textColor)
     }
