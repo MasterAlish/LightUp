@@ -179,7 +179,7 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
     }
 
     override fun onNextLevel() {
-        if (level < 16 * 3) {
+        if (level < 16 * 3 - 1) {
             startActivity(
                 Intent(this, GameActivity::class.java)
                     .putExtra("size", size)
@@ -187,6 +187,17 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
             )
             finish()
         } else {
+            if(size < 14){
+                val nextSize = when (size) {
+                    7 -> 10
+                    else -> 14
+                }
+                startActivity(
+                    Intent(this, GameActivity::class.java)
+                        .putExtra("size", nextSize)
+                        .putExtra("level", 0)
+                )
+            }
             finish()
         }
     }
