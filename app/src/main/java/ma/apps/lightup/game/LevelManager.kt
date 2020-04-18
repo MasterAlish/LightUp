@@ -21,7 +21,7 @@ object LevelManager {
                 row.add(
                     when (char) {
                         '*' -> Cell(CellType.WALL)
-                        '1', '2', '3', '4' -> Cell(CellType.WALL_NUMBERED, char.toString().toInt())
+                        '0', '1', '2', '3', '4' -> Cell(CellType.WALL_NUMBERED, char.toString().toInt())
                         else -> Cell(CellType.EMPTY)
                     }
                 )
