@@ -37,4 +37,5 @@
     <string name="goal_of_the_game">Goal: Light up all cells with bulbs</string>
     <string name="rule_1">Rule 1: Bulbs shouldn\'t illuminate each other</string>
     <string name="rule_2">Rule 2: Walls with number should touch to specified amount of bulbs</string>
+    <string name="how_to_mark_text">Hint: Tap and hold to mark the cell</string>
 </resources>

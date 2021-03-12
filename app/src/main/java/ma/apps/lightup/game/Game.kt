@@ -15,11 +15,13 @@ class Game(val level: Level, val gameListener: GameListener) {
     fun onClick(coord: Coord) {
         when (cells[coord]!!.type) {
             CellType.EMPTY -> {
-                cells[coord] = Cell(CellType.BULB)
-                gameListener.onCellUpdate(coord, cells[coord]!!)
-                bulbs.add(coord)
+                if (!cells[coord]!!.marked) {
+                    cells[coord] = Cell(CellType.BULB)
+                    gameListener.onCellUpdate(coord, cells[coord]!!)
+                    bulbs.add(coord)
 
-                onBulbsChanged()
+                    onBulbsChanged()
+                }
             }
             CellType.BULB, CellType.RED_BULB -> {
                 cells[coord] = Cell(CellType.EMPTY)
@@ -30,6 +32,15 @@ class Game(val level: Level, val gameListener: GameListener) {
             }
             else -> Unit
         }
+    }
+
+    fun onMark(coord: Coord): Boolean {
+        if (cells[coord]!!.type == CellType.EMPTY) {
+            cells[coord]!!.marked = !cells[coord]!!.marked
+            gameListener.onCellUpdate(coord, cells[coord]!!)
+            return true
+        }
+        return false
     }
 
     private fun onBulbsChanged() {

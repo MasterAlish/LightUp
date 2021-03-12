@@ -119,6 +119,10 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
         game.onClick(cell.tag as Coord)
     }
 
+    private val onCellLongClickListener = View.OnLongClickListener { cell ->
+        game.onMark(cell.tag as Coord)
+    }
+
     private val gameListener = object : GameListener {
         override fun onCellUpdate(coord: Coord, cell: Cell) {
             cells[coord]!!.removeAllViews()
@@ -128,6 +132,9 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
                         cells[coord]!!.setBackgroundResource(R.drawable.cell_lighted)
                     } else {
                         cells[coord]!!.setBackgroundResource(R.drawable.cell_empty)
+                    }
+                    if (cell.marked) {
+                        cells[coord]!!.addView(makeMark())
                     }
                 }
                 CellType.BULB -> {
@@ -245,6 +252,19 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
         return image
     }
 
+    private fun makeMark(): ImageView {
+        val margin = App.dimens.dpToPx(6f)
+        val image = ImageView(this)
+        val lp = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        )
+        lp.setMargins(margin, margin, margin, margin)
+        image.layoutParams = lp
+        image.setImageResource(R.drawable.ic_letter_x)
+        return image
+    }
+
     private fun initGameField(gameField: LinearLayout, game: Game) {
         val fieldPadding = App.dimens.dpToPx(4f)
         val textMargin = App.dimens.dpToPx(2f)
@@ -296,6 +316,7 @@ class GameActivity : AppCompatActivity(), FinishDialogListener {
                 cell.clipToPadding = false
                 cell.tag = coord
                 cell.setOnClickListener(onCellClickListener)
+                cell.setOnLongClickListener(onCellLongClickListener)
                 row.addView(cell)
 
                 cells[coord] = cell

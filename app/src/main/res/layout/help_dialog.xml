@@ -56,6 +56,17 @@
             android:textColor="@color/textColor"
             android:textSize="18sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/bellota_regular"
+            android:lineHeight="21sp"
+            android:text="@string/how_to_mark_text"
+            android:textAlignment="center"
+            android:textColor="#FFB2B2"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
     <LinearLayout
